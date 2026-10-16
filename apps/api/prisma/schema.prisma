@@ -1,0 +1,73 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id              String          @id @default(uuid())
+  email           String          @unique
+  passwordHash    String?
+  refreshTokenHash String?
+  username        String          @unique
+  fullName        String?
+  avatarUrl       String?
+  role            Role            @default(USER)
+  isEmailVerified Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  sessions        TypingSession[]
+  certificates    Certificate[]
+
+  @@map("users")
+}
+
+model TypingSession {
+  id                String       @id @default(uuid())
+  userId            String?
+  user              User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  sessionType       String       @default("speed_test") // speed_test, lesson, practice, contest
+  durationSeconds   Int
+  netWpm            Float
+  grossWpm          Float
+  accuracyPct       Float
+  totalKeystrokes   Int
+  correctKeystrokes Int
+  errorCount        Int
+  mode              String       @default("words")
+  textSeed          String?
+  dedupHash         String?      @unique
+  timeSeriesSummary Json?
+  isGuestMigrated   Boolean      @default(false)
+  completedAt       DateTime     @default(now())
+  certificate       Certificate?
+
+  @@index([userId, completedAt(sort: Desc)])
+  @@map("typing_sessions")
+}
+
+model Certificate {
+  id                String        @id @default(uuid())
+  certificateCode   String        @unique // e.g. TYPHON-2026-A8F9-BC31
+  userId            String?
+  user              User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  sessionId         String        @unique
+  session           TypingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  candidateName     String
+  certifiedWpm      Float
+  certifiedAccuracy Float
+  durationSeconds   Int
+  isRevoked         Boolean       @default(false)
+  issuedAt          DateTime      @default(now())
+
+  @@index([certificateCode])
+  @@map("certificates")
+}

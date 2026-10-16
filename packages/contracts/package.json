@@ -1,0 +1,17 @@
+{
+  "name": "@typingtyphon/contracts",
+  "version": "1.0.0",
+  "description": "Shared API contracts, schemas, and typing engine formulas for Typing Typhon",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^22.13.4"
+  }
+}

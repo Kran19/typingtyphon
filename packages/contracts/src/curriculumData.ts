@@ -1,0 +1,716 @@
+import { CurriculumStage, CurriculumLesson } from './curriculum';
+
+export const STAGE_1_HOME_ROW_ANCHORS: CurriculumStage = {
+  stageNumber: 1,
+  slug: 'home-row-anchors',
+  title: 'Home Row Anchors',
+  description: 'Master the baseline resting position for all 8 fingers with the tactile anchor keys F and J.',
+  targetKeys: ['f', 'j', 'd', 'k', 's', 'l', 'a', ';'],
+  lessons: [
+    {
+      id: 'lesson-1-1',
+      stageNumber: 1,
+      stageSlug: 'home-row-anchors',
+      title: 'Keys F and J (Tactile Anchors)',
+      description: 'Place your left index finger on F and right index finger on J. Feel for the raised tactile bumps.',
+      learningObjective: 'Establish baseline muscle memory for the tactile anchor keys F and J using both index fingers.',
+      targetKeys: ['f', 'j'],
+      targetFingers: {
+        f: 'left-index',
+        j: 'right-index',
+      },
+      introDrill: ['fff', 'jjj', 'fjf', 'jfj', 'ff', 'jj', 'fff', 'jjj'],
+      wordDrill: ['fjfj', 'jfjf', 'ffjj', 'jjff', 'fjjf', 'jffj'],
+      remedialDrill: ['fff', 'jjj', 'fjf', 'jfj', 'ff', 'jj'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 15.0,
+      },
+      prerequisiteLessonIds: [],
+    },
+    {
+      id: 'lesson-1-2',
+      stageNumber: 1,
+      stageSlug: 'home-row-anchors',
+      title: 'Keys D and K (Middle Fingers)',
+      description: 'Rest your left middle finger on D and right middle finger on K.',
+      learningObjective: 'Coordinate bilateral middle finger movement alongside established anchor fingers F and J.',
+      targetKeys: ['d', 'k'],
+      targetFingers: {
+        d: 'left-middle',
+        k: 'right-middle',
+      },
+      introDrill: ['ddd', 'kkk', 'dkd', 'kdk', 'fdf', 'jkj', 'fdkj'],
+      wordDrill: ['dkdk', 'kdkd', 'ddkk', 'kkdd', 'dfjk', 'kdfj'],
+      remedialDrill: ['ddd', 'kkk', 'dkd', 'kdk', 'dd', 'kk'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 15.0,
+      },
+      prerequisiteLessonIds: ['lesson-1-1'],
+    },
+    {
+      id: 'lesson-1-3',
+      stageNumber: 1,
+      stageSlug: 'home-row-anchors',
+      title: 'Keys S and L (Ring Fingers)',
+      description: 'Position your left ring finger on S and right ring finger on L.',
+      learningObjective: 'Develop independent neuromuscular control in ring fingers on S and L without lifting adjacent fingers.',
+      targetKeys: ['s', 'l'],
+      targetFingers: {
+        s: 'left-ring',
+        l: 'right-ring',
+      },
+      introDrill: ['sss', 'lll', 'sls', 'lsl', 'sld', 'ldk', 'skfl'],
+      wordDrill: ['slsl', 'lsls', 'ssll', 'llss', 'sdlk', 'ksfl'],
+      remedialDrill: ['sss', 'lll', 'sls', 'lsl', 'ss', 'll'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 15.0,
+      },
+      prerequisiteLessonIds: ['lesson-1-2'],
+    },
+    {
+      id: 'lesson-1-4',
+      stageNumber: 1,
+      stageSlug: 'home-row-anchors',
+      title: 'Keys A and ; (Pinky Fingers)',
+      description: 'Rest your left pinky on A and right pinky on semicolon (;).',
+      learningObjective: 'Anchor the peripheral pinky fingers firmly on home row boundary keys A and semicolon.',
+      targetKeys: ['a', ';'],
+      targetFingers: {
+        a: 'left-pinky',
+        ';': 'right-pinky',
+      },
+      introDrill: ['aaa', ';;;', 'a;a', ';a;', 'asdf', 'jkl;', 'a;'],
+      wordDrill: ['a;a;', ';a;a', 'aa;;', ';;aa', 'asdf', 'jkl;'],
+      remedialDrill: ['aaa', ';;;', 'a;a', ';a;', 'aa', ';;'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 15.0,
+      },
+      prerequisiteLessonIds: ['lesson-1-3'],
+    },
+    {
+      id: 'lesson-1-5',
+      stageNumber: 1,
+      stageSlug: 'home-row-anchors',
+      title: 'Home Row Word Synthesis',
+      description: 'Combine all 8 anchor keys into authentic English words.',
+      learningObjective: 'Achieve unified 8-finger coordination across complete words built from home row anchors.',
+      targetKeys: ['a', 's', 'd', 'f', 'j', 'k', 'l', ';'],
+      targetFingers: {
+        a: 'left-pinky',
+        s: 'left-ring',
+        d: 'left-middle',
+        f: 'left-index',
+        j: 'right-index',
+        k: 'right-middle',
+        l: 'right-ring',
+        ';': 'right-pinky',
+      },
+      introDrill: ['asdf', 'jkl;', 'fad', 'dad', 'fall', 'salad', 'flask'],
+      wordDrill: ['ask', 'dad', 'fall', 'salad', 'flask', 'alas', 'all', 'lad'],
+      remedialDrill: ['asdf', 'jkl;', 'ask', 'dad', 'fall'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 18.0,
+      },
+      prerequisiteLessonIds: ['lesson-1-4'],
+    },
+  ],
+};
+
+export const STAGE_2_HOME_ROW_LATERAL: CurriculumStage = {
+  stageNumber: 2,
+  slug: 'home-row-lateral',
+  title: 'Home Row Lateral Reaches',
+  description: 'Extend your index fingers inward to strike G and H, then immediately return to anchor keys F and J.',
+  targetKeys: ['g', 'h'],
+  lessons: [
+    {
+      id: 'lesson-2-1',
+      stageNumber: 2,
+      stageSlug: 'home-row-lateral',
+      title: 'Keys G and H (Inward Index Reach)',
+      description: 'Reach left index to G and right index to H. Keep other fingers grounded.',
+      learningObjective: 'Master inward horizontal index stretches to G and H with instant muscle-memory rebound to F and J.',
+      targetKeys: ['g', 'h'],
+      targetFingers: {
+        g: 'left-index',
+        h: 'right-index',
+      },
+      introDrill: ['fgf', 'jhj', 'ghg', 'hgh', 'fgh', 'jhg', 'flag', 'glad'],
+      wordDrill: ['glad', 'half', 'shall', 'glass', 'dash', 'flash', 'gash'],
+      remedialDrill: ['fgf', 'jhj', 'ghg', 'hgh', 'gg', 'hh'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 20.0,
+      },
+      prerequisiteLessonIds: ['lesson-1-5'],
+    },
+    {
+      id: 'lesson-2-2',
+      stageNumber: 2,
+      stageSlug: 'home-row-lateral',
+      title: 'Full 10-Key Home Row Fluency',
+      description: 'Type complete English sentences composed exclusively of the 10 home row keys.',
+      learningObjective: 'Synthesize all 10 home row keys into effortless, subconscious typing velocity.',
+      targetKeys: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'],
+      targetFingers: {
+        a: 'left-pinky',
+        s: 'left-ring',
+        d: 'left-middle',
+        f: 'left-index',
+        g: 'left-index',
+        h: 'right-index',
+        j: 'right-index',
+        k: 'right-middle',
+        l: 'right-ring',
+        ';': 'right-pinky',
+      },
+      introDrill: ['a', 'gala', 'dad', 'had', 'a', 'flash;', 'glad', 'lads', 'fall'],
+      wordDrill: ['half', 'glass', 'salad', 'flask', 'shall', 'dash', 'flag', 'alas'],
+      remedialDrill: ['fgf', 'jhj', 'glad', 'half', 'shall'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-2-1'],
+    },
+  ],
+};
+
+export const STAGE_3_TOP_ROW: CurriculumStage = {
+  stageNumber: 3,
+  slug: 'top-row-reaches',
+  title: 'Top Row Keys & Reaches',
+  description: 'Master upward diagonal reaches to the top row (E, I, R, U, T, Y, W, O, Q, P) from your home row anchors.',
+  targetKeys: ['e', 'i', 'r', 'u', 't', 'y', 'w', 'o', 'q', 'p'],
+  lessons: [
+    {
+      id: 'lesson-3-1',
+      stageNumber: 3,
+      stageSlug: 'top-row-reaches',
+      title: 'Keys E and I (Middle Finger Upward)',
+      description: 'Reach left middle finger up from D to E, and right middle finger up from K to I.',
+      learningObjective: 'Establish upward middle-finger diagonal extensions to high-frequency vowels E and I.',
+      targetKeys: ['e', 'i'],
+      targetFingers: {
+        e: 'left-middle',
+        i: 'right-middle',
+      },
+      introDrill: ['ded', 'kik', 'ede', 'iki', 'die', 'kid', 'life', 'side'],
+      wordDrill: ['feed', 'seed', 'hide', 'silk', 'file', 'idle', 'like', 'lead'],
+      remedialDrill: ['ded', 'kik', 'ede', 'iki', 'die', 'kid'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 20.0,
+      },
+      prerequisiteLessonIds: ['lesson-2-2'],
+    },
+    {
+      id: 'lesson-3-2',
+      stageNumber: 3,
+      stageSlug: 'top-row-reaches',
+      title: 'Keys R and U (Index Finger Upward)',
+      description: 'Reach left index up from F to R, and right index up from J to U.',
+      learningObjective: 'Master direct upward reaches from home anchors F and J to consonants R and vowel U.',
+      targetKeys: ['r', 'u'],
+      targetFingers: {
+        r: 'left-index',
+        u: 'right-index',
+      },
+      introDrill: ['frf', 'juj', 'rur', 'uru', 'fur', 'read', 'red', 'sure'],
+      wordDrill: ['user', 'surf', 'fire', 'rude', 'rule', 'fair', 'gear', 'read'],
+      remedialDrill: ['frf', 'juj', 'rur', 'uru', 'fur', 'read'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-3-1'],
+    },
+    {
+      id: 'lesson-3-3',
+      stageNumber: 3,
+      stageSlug: 'top-row-reaches',
+      title: 'Keys T and Y (Index Inward-Upward)',
+      description: 'Reach left index up and inward to T; reach right index up and inward to Y.',
+      learningObjective: 'Coordinate long diagonal upward-inward reaches to T and Y while stabilizing wrist posture.',
+      targetKeys: ['t', 'y'],
+      targetFingers: {
+        t: 'left-index',
+        y: 'right-index',
+      },
+      introDrill: ['ftf', 'jyj', 'tyt', 'yty', 'try', 'the', 'yet', 'stay'],
+      wordDrill: ['that', 'they', 'year', 'tree', 'tray', 'true', 'rate', 'duty'],
+      remedialDrill: ['ftf', 'jyj', 'tyt', 'yty', 'try', 'the'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-3-2'],
+    },
+    {
+      id: 'lesson-3-4',
+      stageNumber: 3,
+      stageSlug: 'top-row-reaches',
+      title: 'Keys W, O, Q, and P (Ring & Pinky Reaches)',
+      description: 'Reach ring fingers up to W and O; extend pinkies up to Q and P.',
+      learningObjective: 'Control peripheral upward stretches with ring and pinky fingers without drifting off baseline.',
+      targetKeys: ['w', 'o', 'q', 'p'],
+      targetFingers: {
+        w: 'left-ring',
+        o: 'right-ring',
+        q: 'left-pinky',
+        p: 'right-pinky',
+      },
+      introDrill: ['sws', 'lol', 'aqa', ';p;', 'who', 'pop', 'row', 'quit'],
+      wordDrill: ['word', 'flow', 'wood', 'slow', 'play', 'drop', 'hope', 'keep'],
+      remedialDrill: ['sws', 'lol', 'aqa', ';p;', 'who', 'pop'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-3-3'],
+    },
+    {
+      id: 'lesson-3-5',
+      stageNumber: 3,
+      stageSlug: 'top-row-reaches',
+      title: 'Top Row & Home Row Integration',
+      description: 'Synthesize all 10 top row keys with home row anchors in authentic English vocabulary.',
+      learningObjective: 'Demonstrate fluid, bidirectional hand movement between home and top row rows.',
+      targetKeys: ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+      targetFingers: {
+        q: 'left-pinky',
+        w: 'left-ring',
+        e: 'left-middle',
+        r: 'left-index',
+        t: 'left-index',
+        y: 'right-index',
+        u: 'right-index',
+        i: 'right-middle',
+        o: 'right-ring',
+        p: 'right-pinky',
+      },
+      introDrill: ['the', 'red', 'pot', 'power', 'hoped', 'for', 'water'],
+      wordDrill: ['power', 'quiet', 'people', 'water', 'street', 'yellow', 'report', 'future'],
+      remedialDrill: ['ded', 'frf', 'sws', 'kik', 'juj', 'lol'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 24.0,
+      },
+      prerequisiteLessonIds: ['lesson-3-4'],
+    },
+  ],
+};
+
+export const STAGE_4_BOTTOM_ROW: CurriculumStage = {
+  stageNumber: 4,
+  slug: 'bottom-row-mastery',
+  title: 'Bottom Row Keys & Reaches',
+  description: 'Master downward finger curls to the bottom row (Z, X, C, V, B, N, M, ,, ., /) while keeping wrists suspended.',
+  targetKeys: ['v', 'm', 'c', ',', 'x', '.', 'b', 'n', 'z', '/'],
+  lessons: [
+    {
+      id: 'lesson-4-1',
+      stageNumber: 4,
+      stageSlug: 'bottom-row-mastery',
+      title: 'Keys V and M (Index Downward Curls)',
+      description: 'Curl left index down from F to V; curl right index down from J to M.',
+      learningObjective: 'Execute precise downward index curls to V and M without dropping wrists onto the desk.',
+      targetKeys: ['v', 'm'],
+      targetFingers: {
+        v: 'left-index',
+        m: 'right-index',
+      },
+      introDrill: ['fvf', 'jmj', 'vmv', 'mvm', 'view', 'move', 'more', 'make'],
+      wordDrill: ['save', 'time', 'ever', 'from', 'farm', 'love', 'very', 'home'],
+      remedialDrill: ['fvf', 'jmj', 'vmv', 'mvm', 'view', 'move'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-3-5'],
+    },
+    {
+      id: 'lesson-4-2',
+      stageNumber: 4,
+      stageSlug: 'bottom-row-mastery',
+      title: 'Keys C and , (Middle Downward Curls)',
+      description: 'Curl left middle down from D to C; curl right middle down from K to comma (,).',
+      learningObjective: 'Coordinate middle finger downward reaches to C and standard punctuation comma (,).',
+      targetKeys: ['c', ','],
+      targetFingers: {
+        c: 'left-middle',
+        ',': 'right-middle',
+      },
+      introDrill: ['dcd', 'k,k', 'cdc', ',k,', 'cat', 'call,', 'face', 'cold,'],
+      wordDrill: ['come,', 'calm,', 'city', 'mice', 'much', 'each,', 'fact', 'rock'],
+      remedialDrill: ['dcd', 'k,k', 'cdc', ',k,', 'cat', 'face'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-4-1'],
+    },
+    {
+      id: 'lesson-4-3',
+      stageNumber: 4,
+      stageSlug: 'bottom-row-mastery',
+      title: 'Keys X and . (Ring Downward Curls)',
+      description: 'Curl left ring down from S to X; curl right ring down from L to period (.).',
+      learningObjective: 'Master downward ring finger strikes on X and sentence period (.) with instant rebound.',
+      targetKeys: ['x', '.'],
+      targetFingers: {
+        x: 'left-ring',
+        '.': 'right-ring',
+      },
+      introDrill: ['sxs', 'l.l', 'xsx', '.l.', 'six.', 'exit.', 'text.', 'tax.'],
+      wordDrill: ['fix.', 'axe.', 'exact.', 'extra.', 'pixel.', 'taxi.', 'relax.'],
+      remedialDrill: ['sxs', 'l.l', 'xsx', '.l.', 'six.', 'exit.'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-4-2'],
+    },
+    {
+      id: 'lesson-4-4',
+      stageNumber: 4,
+      stageSlug: 'bottom-row-mastery',
+      title: 'Keys B and N (Extended Downward Reaches)',
+      description: 'Reach left index diagonally down to B; reach right index diagonally down to N.',
+      learningObjective: 'Master extended inward-downward index reaches to B and N without disturbing anchor alignment.',
+      targetKeys: ['b', 'n'],
+      targetFingers: {
+        b: 'left-index',
+        n: 'right-index',
+      },
+      introDrill: ['fbf', 'jnj', 'bnb', 'nbn', 'book', 'nine', 'best', 'born'],
+      wordDrill: ['bank', 'band', 'bean', 'burn', 'bone', 'name', 'open', 'been'],
+      remedialDrill: ['fbf', 'jnj', 'bnb', 'nbn', 'book', 'nine'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 24.0,
+      },
+      prerequisiteLessonIds: ['lesson-4-3'],
+    },
+    {
+      id: 'lesson-4-5',
+      stageNumber: 4,
+      stageSlug: 'bottom-row-mastery',
+      title: 'Keys Z and / (Pinky Downward Outliers)',
+      description: 'Curl left pinky down from A to Z; curl right pinky down from semicolon to slash (/).',
+      learningObjective: 'Establish reliable muscle memory for bottom row pinky outliers Z and forward slash (/).',
+      targetKeys: ['z', '/'],
+      targetFingers: {
+        z: 'left-pinky',
+        '/': 'right-pinky',
+      },
+      introDrill: ['aza', ';/;', 'z/z', '/z/', 'zone', 'size', 'quiz', 'and/or'],
+      wordDrill: ['zero', 'maze', 'zoom', 'prize', 'haze', 'yes/no', 'w/o', 'per/day'],
+      remedialDrill: ['aza', ';/;', 'z/z', '/z/', 'zone', 'size'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 24.0,
+      },
+      prerequisiteLessonIds: ['lesson-4-4'],
+    },
+    {
+      id: 'lesson-4-6',
+      stageNumber: 4,
+      stageSlug: 'bottom-row-mastery',
+      title: 'Complete 26-Letter Alphabet Mastery',
+      description: 'Type authentic pangrams and complex English sentences containing every letter of the alphabet.',
+      learningObjective: 'Demonstrate holistic touch typing speed across all 26 letters and punctuation marks.',
+      targetKeys: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+      targetFingers: {
+        a: 'left-pinky',
+        b: 'left-index',
+        c: 'left-middle',
+        d: 'left-middle',
+        e: 'left-middle',
+        f: 'left-index',
+        g: 'left-index',
+        h: 'right-index',
+        i: 'right-middle',
+        j: 'right-index',
+        k: 'right-middle',
+        l: 'right-ring',
+        m: 'right-index',
+        n: 'right-index',
+        o: 'right-ring',
+        p: 'right-pinky',
+        q: 'left-pinky',
+        r: 'left-index',
+        s: 'left-ring',
+        t: 'left-index',
+        u: 'right-index',
+        v: 'left-index',
+        w: 'left-ring',
+        x: 'left-ring',
+        y: 'right-index',
+        z: 'left-pinky',
+      },
+      introDrill: ['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog.'],
+      wordDrill: ['pack', 'my', 'box', 'with', 'five', 'dozen', 'liquor', 'jugs.'],
+      remedialDrill: ['the', 'quick', 'brown', 'fox', 'jumps', 'lazy', 'dog.'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 26.0,
+      },
+      prerequisiteLessonIds: ['lesson-4-5'],
+    },
+  ],
+};
+
+export const STAGE_5_NUMBER_ROW: CurriculumStage = {
+  stageNumber: 5,
+  slug: 'number-row-mastery',
+  title: 'Number Row Typing & Patterns',
+  description: 'Master upward reaches to the top numeric row (1–0) without looking down at the keyboard.',
+  targetKeys: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+  lessons: [
+    {
+      id: 'lesson-5-1',
+      stageNumber: 5,
+      stageSlug: 'number-row-mastery',
+      title: 'Left-Hand Numbers (1, 2, 3, 4, 5)',
+      description: 'Reach left hand fingers up to the number keys: 1 (pinky), 2 (ring), 3 (middle), 4 and 5 (index).',
+      learningObjective: 'Establish blind upward reach trajectories for left-hand numerals 1 through 5.',
+      targetKeys: ['1', '2', '3', '4', '5'],
+      targetFingers: {
+        '1': 'left-pinky',
+        '2': 'left-ring',
+        '3': 'left-middle',
+        '4': 'left-index',
+        '5': 'left-index',
+      },
+      introDrill: ['a1a', 's2s', 'd3d', 'f4f', 'f5f', '123', '454', '1524'],
+      wordDrill: ['321', '415', '532', '142', '253', '543', '54321', '12345'],
+      remedialDrill: ['a1a', 's2s', 'd3d', 'f4f', 'f5f', '123', '454'],
+      passThreshold: {
+        minAccuracyPct: 95.0,
+        minWpm: 18.0,
+      },
+      prerequisiteLessonIds: ['lesson-4-6'],
+    },
+    {
+      id: 'lesson-5-2',
+      stageNumber: 5,
+      stageSlug: 'number-row-mastery',
+      title: 'Right-Hand Numbers (6, 7, 8, 9, 0)',
+      description: 'Reach right hand fingers up to the numbers: 6 and 7 (index), 8 (middle), 9 (ring), 0 (pinky).',
+      learningObjective: 'Establish blind upward reach trajectories for right-hand numerals 6 through 0.',
+      targetKeys: ['6', '7', '8', '9', '0'],
+      targetFingers: {
+        '6': 'right-index',
+        '7': 'right-index',
+        '8': 'right-middle',
+        '9': 'right-ring',
+        '0': 'right-pinky',
+      },
+      introDrill: ['j6j', 'j7j', 'k8k', 'l9l', ';0;', '678', '909', '6087'],
+      wordDrill: ['7890', '9876', '2026', '1000', '999', '8080', '600', '750'],
+      remedialDrill: ['j6j', 'j7j', 'k8k', 'l9l', ';0;', '678', '909'],
+      passThreshold: {
+        minAccuracyPct: 95.0,
+        minWpm: 18.0,
+      },
+      prerequisiteLessonIds: ['lesson-5-1'],
+    },
+    {
+      id: 'lesson-5-3',
+      stageNumber: 5,
+      stageSlug: 'number-row-mastery',
+      title: 'Number Sequences & Practical Patterns',
+      description: 'Type practical multi-digit numbers, years, quantities, and chronological records.',
+      learningObjective: 'Synthesize full 10-digit number row dexterity in realistic data entry and prose contexts.',
+      targetKeys: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+      targetFingers: {
+        '1': 'left-pinky',
+        '2': 'left-ring',
+        '3': 'left-middle',
+        '4': 'left-index',
+        '5': 'left-index',
+        '6': 'right-index',
+        '7': 'right-index',
+        '8': 'right-middle',
+        '9': 'right-ring',
+        '0': 'right-pinky',
+      },
+      introDrill: ['year 2026', 'room 104', 'page 385', 'route 66', 'flight 747'],
+      wordDrill: ['100', '250', '500', '750', '1000', '1999', '2025', '2030', '12345'],
+      remedialDrill: ['123', '456', '789', '012', '2026', '1000'],
+      passThreshold: {
+        minAccuracyPct: 95.0,
+        minWpm: 20.0,
+      },
+      prerequisiteLessonIds: ['lesson-5-2'],
+    },
+  ],
+};
+
+export const STAGE_6_SHIFT_AND_SYMBOLS: CurriculumStage = {
+  stageNumber: 6,
+  slug: 'shift-capitalization-symbols',
+  title: 'Shift Coordination & Symbols',
+  description: 'Master the opposite-hand shift rule, proper noun capitalization, and common punctuation symbols (!, ?, ", \', $, %).',
+  targetKeys: ['!', '?', '"', "'", '-', '$', '%', '&', ':', ';'],
+  lessons: [
+    {
+      id: 'lesson-6-1',
+      stageNumber: 6,
+      stageSlug: 'shift-capitalization-symbols',
+      title: 'Opposite-Hand Shift Coordination',
+      description: 'Hold Right Shift with right pinky to capitalize left-hand letters; hold Left Shift for right-hand letters.',
+      learningObjective: 'Internalize the golden rule of touch typing capitalization: shift with the opposite hand.',
+      targetKeys: ['T', 'P', 'L', 'A', 'M'],
+      targetFingers: {
+        'T': 'left-index',
+        'P': 'right-pinky',
+        'L': 'right-ring',
+        'A': 'left-pinky',
+        'M': 'right-index',
+      },
+      introDrill: ['The', 'Paris', 'Tokyo', 'London', 'America', 'Mary', 'John', 'Alex'],
+      wordDrill: ['Monday', 'Friday', 'March', 'April', 'California', 'Canada', 'Europe'],
+      remedialDrill: ['The', 'Paris', 'Tokyo', 'London', 'America'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-5-3'],
+    },
+    {
+      id: 'lesson-6-2',
+      stageNumber: 6,
+      stageSlug: 'shift-capitalization-symbols',
+      title: 'Sentence Punctuation (?, !, \', ", -)',
+      description: 'Coordinate shift and reach keys to type question marks, exclamation marks, apostrophes, and quotes.',
+      learningObjective: 'Seamlessly integrate expressive sentence punctuation into typing flow.',
+      targetKeys: ['?', '!', "'", '"', '-'],
+      targetFingers: {
+        '?': 'right-pinky',
+        '!': 'left-pinky',
+        "'": 'right-pinky',
+        '"': 'right-pinky',
+        '-': 'right-pinky',
+      },
+      introDrill: ['Wait!', 'Who?', "It's", '"Yes,"', 'well-known', 'Stop!', 'Why?'],
+      wordDrill: ['"Hello!"', '"Goodbye?"', "don't", "won't", 'user-friendly', 'state-of-the-art'],
+      remedialDrill: ['Wait!', 'Who?', "It's", 'well-known'],
+      passThreshold: {
+        minAccuracyPct: 95.0,
+        minWpm: 22.0,
+      },
+      prerequisiteLessonIds: ['lesson-6-1'],
+    },
+    {
+      id: 'lesson-6-3',
+      stageNumber: 6,
+      stageSlug: 'shift-capitalization-symbols',
+      title: 'Practical Symbols & Syntax ($, %, &, @, :)',
+      description: 'Master business, financial, and technical symbols using precise shift-number combinations.',
+      learningObjective: 'Master shift combinations with number keys to type essential symbols without looking.',
+      targetKeys: ['$', '%', '&', '@', ':', ';'],
+      targetFingers: {
+        '$': 'left-index',
+        '%': 'left-index',
+        '&': 'right-index',
+        '@': 'left-ring',
+        ':': 'right-pinky',
+        ';': 'right-pinky',
+      },
+      introDrill: ['$100', '50%', 'Q&A', 'user@domain', 'Note:', 'Time: 12:30'],
+      wordDrill: ['$25.00', '100%', 'Tom & Jerry', 'info@site.com', 'Ratio: 2:1', 'Price: $50'],
+      remedialDrill: ['$100', '50%', 'Q&A', 'user@domain'],
+      passThreshold: {
+        minAccuracyPct: 95.0,
+        minWpm: 20.0,
+      },
+      prerequisiteLessonIds: ['lesson-6-2'],
+    },
+    {
+      id: 'lesson-6-4',
+      stageNumber: 6,
+      stageSlug: 'shift-capitalization-symbols',
+      title: 'Full Real-World Prose Mastery',
+      description: 'Demonstrate complete touch typing speed across authentic prose with rich capitalization and punctuation.',
+      learningObjective: 'Achieve total keyboard mastery: 100% QWERTY touch typing with speed, rhythm, and accuracy.',
+      targetKeys: ['.', ',', '!', '?', '"', "'", ':', ';', '-', '$'],
+      targetFingers: {
+        '.': 'right-ring',
+        ',': 'right-middle',
+        '!': 'left-pinky',
+        '?': 'right-pinky',
+        '"': 'right-pinky',
+        "'": 'right-pinky',
+        ':': 'right-pinky',
+        ';': 'right-pinky',
+        '-': 'right-pinky',
+        '$': 'left-index',
+      },
+      introDrill: ['Typing Typhon is fast, free, and accurate!', 'Did you know that 100% accuracy beats raw speed?'],
+      wordDrill: ['In 2026, over 50% of work is typed.', 'Practice makes permanent: focus on clean rhythm!'],
+      remedialDrill: ['Typing Typhon is fast and accurate!', 'Did you know that accuracy beats speed?'],
+      passThreshold: {
+        minAccuracyPct: 96.0,
+        minWpm: 25.0,
+      },
+      prerequisiteLessonIds: ['lesson-6-3'],
+    },
+  ],
+};
+
+export const ALL_CURRICULUM_STAGES: CurriculumStage[] = [
+  STAGE_1_HOME_ROW_ANCHORS,
+  STAGE_2_HOME_ROW_LATERAL,
+  STAGE_3_TOP_ROW,
+  STAGE_4_BOTTOM_ROW,
+  STAGE_5_NUMBER_ROW,
+  STAGE_6_SHIFT_AND_SYMBOLS,
+];
+
+export const INITIAL_CURRICULUM_STAGES: CurriculumStage[] = ALL_CURRICULUM_STAGES;
+
+/**
+ * Checks whether a given curriculum lesson is unlocked based on prerequisite completion.
+ */
+export function isLessonUnlocked(
+  lesson: CurriculumLesson,
+  progressMap: Record<string, { passed?: boolean }>
+): boolean {
+  if (!lesson.prerequisiteLessonIds || lesson.prerequisiteLessonIds.length === 0) {
+    return true;
+  }
+  return lesson.prerequisiteLessonIds.every((id: string) => Boolean(progressMap[id]?.passed));
+}
+
+/**
+ * Returns any unfulfilled prerequisite lesson IDs for a given lesson.
+ */
+export function getMissingPrerequisites(
+  lesson: CurriculumLesson,
+  progressMap: Record<string, { passed?: boolean }>
+): string[] {
+  if (!lesson.prerequisiteLessonIds || lesson.prerequisiteLessonIds.length === 0) {
+    return [];
+  }
+  return lesson.prerequisiteLessonIds.filter((id: string) => !progressMap[id]?.passed);
+}
+
+/**
+ * Finds a lesson and its parent stage by ID across all curriculum stages.
+ */
+export function findLessonById(lessonId: string): { lesson: CurriculumLesson; stage: CurriculumStage } | null {
+  for (const stage of ALL_CURRICULUM_STAGES) {
+    const lesson = stage.lessons.find((l) => l.id === lessonId);
+    if (lesson) {
+      return { lesson, stage };
+    }
+  }
+  return null;
+}

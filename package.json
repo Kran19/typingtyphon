@@ -1,0 +1,28 @@
+{
+  "name": "typingtyphon-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Typing Typhon - Next-Generation Touch-Typing Education & Speed Platform",
+  "packageManager": "npm@11.17.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rimraf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4",
+    "typescript": "^5.7.3",
+    "@types/node": "^22.13.4"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "@typingtyphon/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Typing Typhon - NestJS Backend REST API",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "nest start",
+    "dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "echo \"Linting API...\"",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.10",
+    "@nestjs/core": "^11.0.10",
+    "@nestjs/platform-express": "^11.0.10",
+    "@nestjs/config": "^4.0.0",
+    "@nestjs/throttler": "^6.4.0",
+    "@prisma/client": "^6.4.1",
+    "@typingtyphon/contracts": "*",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "cookie-parser": "^1.4.7",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.4",
+    "@nestjs/schematics": "^11.0.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.13.4",
+    "prisma": "^6.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
