@@ -97,7 +97,7 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({
       {/* Academy Header Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)',
+          background: 'var(--bg-surface-subtle)',
           border: '1px solid var(--border-subtle)',
           borderRadius: '1.25rem',
           padding: '1.75rem 2rem',
@@ -106,33 +106,34 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1.5rem',
-          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
         }}
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
             <span
               style={{
-                fontSize: '0.75rem',
+                fontSize: '0.72rem',
                 textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                background: 'rgba(56, 189, 248, 0.15)',
-                color: '#38BDF8',
+                letterSpacing: '0.08em',
+                background: 'rgba(14, 165, 233, 0.15)',
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+                color: '#38bdf8',
                 padding: '0.2rem 0.6rem',
                 borderRadius: '9999px',
-                fontWeight: 700,
+                fontWeight: 600,
+                fontFamily: 'var(--font-mono)',
               }}
             >
               Touch Typing Academy
             </span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
               Stages 1–6 (Free &amp; Guest Accessible)
             </span>
           </div>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#F8FAFC', margin: 0, letterSpacing: '-0.02em' }}>
             Systematic Alphabet Mastery
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.4rem', maxWidth: '580px', lineHeight: 1.5 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '0.35rem', maxWidth: '580px', lineHeight: 1.5 }}>
             Touch typing is neuromuscular motor memory. Master finger reaches systematically from home row anchors through top row, bottom row, numbers, and bilateral shift coordination.
           </p>
         </div>
@@ -140,43 +141,44 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({
         {/* Global Progress Pill */}
         <div
           style={{
-            background: 'rgba(15, 23, 42, 0.8)',
-            border: '1px solid rgba(51, 65, 85, 0.8)',
+            background: 'var(--bg-primary)',
+            border: '1px solid var(--border-subtle)',
             borderRadius: '1rem',
-            padding: '1.25rem 1.75rem',
+            padding: '1.1rem 1.6rem',
             textAlign: 'center',
-            minWidth: '160px',
+            minWidth: '150px',
           }}
         >
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Curriculum Progress
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>
+            Progress
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#38BDF8', margin: '0.2rem 0' }}>
+          <div style={{ fontSize: '1.85rem', fontWeight: 700, fontFamily: 'var(--font-mono)', color: '#38bdf8', margin: '0.15rem 0' }}>
             {passedLessonsCount} / {totalLessons}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
             Lessons Passed
           </div>
         </div>
       </div>
 
       {/* Academy Navigation Mode Switcher: Stages vs Analytics */}
-      <div style={{ display: 'flex', gap: '0.5rem', background: '#0F172A', padding: '0.3rem', borderRadius: '0.75rem', border: '1px solid #334155', alignSelf: 'flex-start' }}>
+      <div style={{ display: 'flex', gap: '0.35rem', background: 'rgba(255, 255, 255, 0.03)', padding: '0.25rem', borderRadius: '9999px', border: '1px solid var(--border-subtle)', alignSelf: 'flex-start' }}>
         <button
           id="btn-tab-curriculum-stages"
           onClick={() => setViewMode('stages')}
           style={{
-            background: viewMode === 'stages' ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
-            border: viewMode === 'stages' ? '1px solid #38BDF8' : '1px solid transparent',
-            color: viewMode === 'stages' ? '#38BDF8' : 'var(--text-secondary)',
-            padding: '0.45rem 1rem',
-            borderRadius: '0.5rem',
-            fontSize: '0.85rem',
-            fontWeight: 700,
+            background: viewMode === 'stages' ? 'var(--brand-primary)' : 'transparent',
+            border: viewMode === 'stages' ? '1px solid var(--brand-cyan)' : '1px solid transparent',
+            color: viewMode === 'stages' ? '#ffffff' : 'var(--text-secondary)',
+            padding: '0.35rem 0.9rem',
+            borderRadius: '9999px',
+            fontSize: '0.8rem',
+            fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '0.4rem',
+            transition: 'all 0.15s ease',
           }}
         >
           <span>📚</span>

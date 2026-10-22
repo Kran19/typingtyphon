@@ -300,21 +300,20 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
               style={{
                 alignSelf: 'flex-start',
                 marginTop: '0.25rem',
-                background: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
-                border: 'none',
-                color: '#FFFFFF',
+                background: 'rgba(245, 158, 11, 0.12)',
+                border: '1px solid rgba(245, 158, 11, 0.3)',
+                color: '#f59e0b',
                 padding: '0.4rem 0.85rem',
                 borderRadius: '0.4rem',
                 fontSize: '0.8rem',
-                fontWeight: 700,
+                fontWeight: 600,
+                fontFamily: 'var(--font-mono)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.35rem',
-                boxShadow: '0 2px 8px rgba(2, 132, 199, 0.3)',
               }}
             >
-              <span>🎯</span>
               Start Recommended Practice →
             </button>
           )}
@@ -324,8 +323,8 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
         {guestSessionCount >= 3 && (
           <div
             style={{
-              background: 'rgba(2, 132, 199, 0.08)',
-              border: '1px solid rgba(56, 189, 248, 0.2)',
+              background: 'rgba(255, 255, 255, 0.02)',
+              border: '1px solid var(--border-subtle)',
               borderRadius: '0.75rem',
               padding: '0.85rem 1rem',
               display: 'flex',
@@ -333,7 +332,7 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
               gap: '0.35rem',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#38BDF8', fontWeight: 600, fontSize: '0.85rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#f59e0b', fontWeight: 600, fontSize: '0.825rem' }}>
               <span>☁️</span>
               Don&apos;t lose your progress!
             </div>
@@ -345,9 +344,9 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
                 onClick={onOpenAuth}
                 style={{
                   alignSelf: 'flex-start',
-                  background: 'rgba(56, 189, 248, 0.15)',
-                  border: '1px solid #38BDF8',
-                  color: '#F8FAFC',
+                  background: 'rgba(245, 158, 11, 0.1)',
+                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  color: '#f59e0b',
                   padding: '0.25rem 0.65rem',
                   borderRadius: '0.4rem',
                   fontSize: '0.75rem',
@@ -365,29 +364,20 @@ export const ResultsModal: React.FC<ResultsModalProps> = ({
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
           <button
             onClick={onRestart}
+            className="btn-primary"
             style={{
               flex: 1,
-              background: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
-              border: 'none',
-              color: '#FFFFFF',
               padding: '0.85rem 1.5rem',
               borderRadius: '0.75rem',
-              fontWeight: 700,
-              fontSize: '0.95rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem',
-              boxShadow: '0 4px 14px rgba(2, 132, 199, 0.4)',
-              transition: 'transform 0.1s ease',
+              fontSize: '0.9rem',
+              fontFamily: 'var(--font-sans)',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
               <path d="M3 3v5h5" />
             </svg>
-            Restart Test (Tab + Enter)
+            Restart Test (Tab / Esc)
           </button>
         </div>
       </div>

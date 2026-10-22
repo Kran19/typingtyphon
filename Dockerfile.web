@@ -1,0 +1,49 @@
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Copy workspace definitions
+COPY package.json package-lock.json tsconfig.base.json ./
+COPY packages/contracts/package.json ./packages/contracts/
+COPY packages/contracts/tsconfig.json ./packages/contracts/
+COPY apps/api/package.json ./apps/api/
+COPY apps/web/package.json ./apps/web/
+
+# Install monorepo dependencies
+RUN npm ci
+
+# Copy contracts source and build
+COPY packages/contracts ./packages/contracts
+RUN npm run build --workspace=@typingtyphon/contracts
+
+# Copy web application source
+COPY apps/web ./apps/web
+
+# Build arguments for public client environment variables
+ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
+ARG NEXT_PUBLIC_API_URL=http://localhost:4001
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+# Build Next.js application
+RUN npm run build --workspace=@typingtyphon/web
+
+# Production Runner
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages/contracts ./packages/contracts
+COPY --from=builder /app/apps/web ./apps/web
+
+WORKDIR /app/apps/web
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]

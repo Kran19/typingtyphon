@@ -12,9 +12,12 @@ import {
 } from '@typingtyphon/contracts';
 import { Header } from '../components/Header';
 import { TypingCanvas } from '../components/TypingCanvas';
+import { AcademyCard } from '../components/AcademyCard';
 import { ResultsModal } from '../components/ResultsModal';
 import { GuestHistory } from '../components/GuestHistory';
 import { CurriculumView } from '../components/CurriculumView';
+import { FingerGuide } from '../components/FingerGuide';
+import { KeybrResults } from '../components/KeybrResults';
 import { AuthModal } from '../components/AuthModal';
 import { Footer } from '../components/Footer';
 import {
@@ -28,7 +31,7 @@ import {
 } from '../lib/storage';
 
 export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<'speed' | 'curriculum'>('speed');
+  const [activeTab, setActiveTab] = useState<'speed' | 'curriculum' | 'results'>('speed');
   const [duration, setDuration] = useState<number>(60);
   const [restartCounter, setRestartCounter] = useState<number>(0);
   const [activeResult, setActiveResult] = useState<EngineResult | null>(null);
@@ -36,6 +39,9 @@ export default function HomePage() {
   const [curriculumProgress, setCurriculumProgress] = useState<Record<string, LessonProgress>>({});
   const [currentUser, setCurrentUser] = useState<UserProfileDto | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [activeTargetChar, setActiveTargetChar] = useState<string>('f');
+  const [showFingerGuide, setShowFingerGuide] = useState<boolean>(true);
+
   const [activeDrill, setActiveDrill] = useState<{
     stage: CurriculumStage;
     lesson: CurriculumLesson;
@@ -81,7 +87,7 @@ export default function HomePage() {
         }
       }
     } catch {
-      // Backend offline or unreachable: user practices smoothly as guest without interruption
+      // Offline fallback: practice cleanly without interruption
     }
   };
 
@@ -113,7 +119,6 @@ export default function HomePage() {
     setActiveResult(result);
 
     if (activeDrill) {
-      // Evaluate lesson pass/fail criteria
       const isPass =
         result.accuracyPct >= activeDrill.lesson.passThreshold.minAccuracyPct &&
         result.netWpm >= activeDrill.lesson.passThreshold.minWpm;
@@ -127,7 +132,6 @@ export default function HomePage() {
         needsRemedial: !isPass,
       });
 
-      // Also persist to guest history
       saveGuestSession(result, `curriculum-${activeDrill.drillType}`);
     } else {
       setActiveLessonResult(null);
@@ -135,12 +139,15 @@ export default function HomePage() {
     }
 
     refreshGuestData();
+    // Transition cleanly to dedicated Keybr speed & keyboard heatmap view
+    setActiveTab('results');
   };
 
   const handleRestart = () => {
     setActiveResult(null);
     setActiveLessonResult(null);
     setRestartCounter((prev) => prev + 1);
+    setActiveTab('speed');
   };
 
   const handleDurationChange = (newDuration: number) => {
@@ -148,6 +155,7 @@ export default function HomePage() {
     setActiveResult(null);
     setActiveLessonResult(null);
     setRestartCounter((prev) => prev + 1);
+    setActiveTab('speed');
   };
 
   const handleClearHistory = () => {
@@ -172,8 +180,8 @@ export default function HomePage() {
     setActiveResult(null);
     setActiveLessonResult(null);
     setRestartCounter((prev) => prev + 1);
+    setActiveTab('speed');
 
-    // Smoothly scroll canvas into focus
     if (canvasRef.current) {
       canvasRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -202,9 +210,71 @@ export default function HomePage() {
     }
   };
 
+  const handlePracticeSpecificKeys = (keys: string[]) => {
+    const homeAnchors = ['f', 'j', 'd', 'k', 's', 'l'];
+    const drills: string[] = [];
+    const cleanKeys = keys.map((k) => k.toLowerCase()).filter((k) => k.length === 1);
+
+    for (const k of cleanKeys) {
+      drills.push(`${k}${k}${k}`);
+      for (const h of homeAnchors) {
+        drills.push(`${k}${h}${k}`);
+        drills.push(`${h}${k}${h}`);
+      }
+    }
+
+    const commonWords = [
+      'the', 'that', 'with', 'have', 'this', 'from', 'they', 'here',
+      'make', 'like', 'time', 'just', 'know', 'take', 'into', 'year',
+      'good', 'some', 'could', 'them', 'look', 'work', 'first', 'even',
+    ];
+    for (const w of commonWords) {
+      if (cleanKeys.some((k) => w.includes(k))) {
+        drills.push(w);
+      }
+    }
+
+    const finalWords = drills.slice(0, 50);
+    while (finalWords.length < 40) {
+      finalWords.push('practice');
+    }
+
+    setActiveDrill({
+      stage: {
+        stageNumber: 0,
+        title: 'Keybr Weak Key Remediation',
+        description: 'Adaptive drill targeting weak keys',
+        requiredKeys: cleanKeys,
+        lessons: [],
+      } as any,
+      lesson: {
+        id: `remedial-${cleanKeys.join('')}`,
+        stageNumber: 0,
+        stageSlug: 'remedial',
+        title: `Weak Keys Drill (${cleanKeys.map((k) => k.toUpperCase()).join(', ')})`,
+        targetKeys: cleanKeys,
+        targetFingers: {},
+        description: 'Build confidence and eliminate hesitation on these keys',
+        passThreshold: { minAccuracyPct: 95, minWpm: 20 },
+        introDrill: finalWords,
+        wordDrill: finalWords,
+        remedialDrill: finalWords,
+      },
+      drillType: 'remedial',
+      words: finalWords,
+    });
+
+    setActiveResult(null);
+    setActiveLessonResult(null);
+    setRestartCounter((prev) => prev + 1);
+    setActiveTab('speed');
+  };
+
+  const previousSession = guestSessions.length > 0 ? guestSessions[0] : null;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Global Header */}
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
+      {/* Compact Sticky Header */}
       <Header
         duration={duration}
         onDurationChange={handleDurationChange}
@@ -214,146 +284,167 @@ export default function HomePage() {
         onTabChange={setActiveTab}
         currentUser={currentUser}
         onOpenAuth={() => setIsAuthModalOpen(true)}
+        hasResult={!!activeResult}
       />
 
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {/* Protected Active Typing Canvas & Drill State */}
-        <div ref={canvasRef} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          {activeDrill && (
-            <div style={{ maxWidth: '1000px', width: '100%', padding: '0.5rem 1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        {/* Speed Test Main View */}
+        {activeTab === 'speed' && (
+          <div
+            ref={canvasRef}
+            style={{
+              maxWidth: '1380px',
+              width: '100%',
+              padding: '2rem 1.5rem 3rem 1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.75rem',
+            }}
+          >
+            {/* Title & Action Strip */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <h1
+                  style={{
+                    fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                    fontWeight: 800,
+                    color: 'var(--text-primary)',
+                    letterSpacing: '-0.02em',
+                    margin: 0,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Build your typing <span style={{ color: '#38bdf8' }}>flow</span>
+                </h1>
+                <p
+                  style={{
+                    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+                    color: 'var(--text-secondary)',
+                    marginTop: '0.35rem',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  Type naturally. Get faster. Build real touch typing skills from 0 to Hero.
+                </p>
+              </div>
+
+              {/* Toggle Finger & Hands Guide Button */}
               <button
-                onClick={handleExitDrill}
+                onClick={() => setShowFingerGuide((prev) => !prev)}
                 style={{
-                  background: 'rgba(30, 41, 59, 0.6)',
-                  border: '1px solid #334155',
-                  color: 'var(--text-secondary)',
-                  padding: '0.35rem 0.75rem',
-                  borderRadius: '0.5rem',
+                  background: showFingerGuide ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.04)',
+                  border: showFingerGuide ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid var(--border-subtle)',
+                  color: showFingerGuide ? '#38bdf8' : 'var(--text-secondary)',
+                  padding: '0.45rem 0.95rem',
+                  borderRadius: '9999px',
                   fontSize: '0.8rem',
+                  fontWeight: 600,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.35rem',
+                  gap: '0.45rem',
+                  transition: 'all 0.15s ease',
                 }}
               >
-                ✕ Exit Lesson Drill (Back to Free Practice)
+                <span>✋</span>
+                <span>{showFingerGuide ? 'Hide Finger Guide' : 'Show Finger Guide & Hands'}</span>
               </button>
             </div>
-          )}
 
-          <TypingCanvas
-            durationSeconds={duration}
-            onComplete={handleTestComplete}
-            restartTrigger={restartCounter}
-            onRestart={handleRestart}
-            customWords={activeDrill ? activeDrill.words : undefined}
-            drillBadge={
-              activeDrill
-                ? {
-                    stageTitle: `Stage ${activeDrill.stage.stageNumber}: ${activeDrill.stage.title}`,
-                    lessonTitle: `${activeDrill.lesson.title} (${activeDrill.drillType.toUpperCase()} DRILL)`,
-                    targetKeys: activeDrill.lesson.targetKeys,
-                    passGoal: `≥ ${activeDrill.lesson.passThreshold.minAccuracyPct}% Acc & ${activeDrill.lesson.passThreshold.minWpm} WPM`,
+            {/* Responsive Main Layout: 2-column on desktop, stacked on mobile */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 650px), 1fr))',
+                gap: '1.75rem',
+                alignItems: 'start',
+              }}
+            >
+              {/* Left Column: Main Typing Workspace */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', minWidth: 0 }}>
+                <TypingCanvas
+                  durationSeconds={duration}
+                  onComplete={handleTestComplete}
+                  restartTrigger={restartCounter}
+                  onRestart={handleRestart}
+                  customWords={activeDrill ? activeDrill.words : undefined}
+                  previousSession={previousSession}
+                  onActiveCharChange={setActiveTargetChar}
+                  drillBadge={
+                    activeDrill
+                      ? {
+                          stageTitle: `Stage ${activeDrill.stage.stageNumber}: ${activeDrill.stage.title}`,
+                          lessonTitle: `${activeDrill.lesson.title} (${activeDrill.drillType.toUpperCase()})`,
+                          targetKeys: activeDrill.lesson.targetKeys,
+                          passGoal: `≥ ${activeDrill.lesson.passThreshold.minAccuracyPct}% Acc & ${activeDrill.lesson.passThreshold.minWpm} WPM`,
+                        }
+                      : null
                   }
-                : null
-            }
-          />
-        </div>
+                />
 
-        {/* Post-Test Results Modal */}
-        {activeResult && (
-          <ResultsModal
+                {/* Real-time Interactive Finger & Hands Guide */}
+                {showFingerGuide && (
+                  <FingerGuide
+                    activeChar={activeTargetChar}
+                    isDrill={!!activeDrill}
+                    onSelectKeyToPractice={(k) => handlePracticeSpecificKeys([k])}
+                  />
+                )}
+              </div>
+
+              {/* Right Column: Learning Panel (Touch Typing Academy) */}
+              <div style={{ maxWidth: '440px', width: '100%', justifySelf: 'stretch' }}>
+                <AcademyCard
+                  progressMap={curriculumProgress}
+                  onSelectDrill={handleSelectDrill}
+                  activeDrillLessonId={activeDrill?.lesson.id}
+                  onExitDrill={handleExitDrill}
+                  onOpenFullAcademy={() => setActiveTab('curriculum')}
+                />
+              </div>
+            </div>
+
+            {/* Collapsible Guest History & Progress Drawer */}
+            <div style={{ marginTop: '0.5rem' }}>
+              <GuestHistory
+                sessions={guestSessions}
+                stats={guestStats}
+                onClearHistory={handleClearHistory}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Full Academy Curriculum View (Tab) */}
+        {activeTab === 'curriculum' && (
+          <div style={{ width: '100%', maxWidth: '1200px', padding: '1.5rem 1.5rem 3rem 1.5rem' }}>
+            <CurriculumView
+              progressMap={curriculumProgress}
+              onSelectDrill={handleSelectDrill}
+              activeLessonId={activeDrill?.lesson.id}
+            />
+          </div>
+        )}
+
+        {/* Dedicated Keybr Post-Test Results & Speed Keyboard Heatmap View (Tab) */}
+        {activeTab === 'results' && activeResult && (
+          <KeybrResults
             result={activeResult}
             onRestart={handleRestart}
             guestSessionCount={guestSessions.length}
-            lessonResult={activeLessonResult}
             onOpenAuth={() => setIsAuthModalOpen(true)}
+            lessonResult={activeLessonResult}
             onStartRecommendation={handleStartRecommendation}
+            onPracticeSpecificKeys={handlePracticeSpecificKeys}
+            onClose={() => setActiveTab('speed')}
           />
         )}
-
-        {/* Touch Typing Academy Curriculum (Stages 1 & 2) */}
-        <CurriculumView
-          progressMap={curriculumProgress}
-          onSelectDrill={handleSelectDrill}
-          activeLessonId={activeDrill?.lesson.id}
-        />
-
-        {/* Recent Guest Practice History */}
-        <GuestHistory
-          sessions={guestSessions}
-          stats={guestStats}
-          onClearHistory={handleClearHistory}
-        />
-
-        {/* Feature Highlights Grid */}
-        <section
-          style={{
-            maxWidth: '1000px',
-            width: '100%',
-            padding: '2rem 1.5rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem',
-          }}
-        >
-          <div
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '1rem',
-              padding: '1.5rem',
-            }}
-          >
-            <div style={{ color: 'var(--char-correct)', fontSize: '1.5rem', marginBottom: '0.75rem' }}>⚡</div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-              Frictionless & Instant
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Start typing immediately without signing up, clicking modals, or paying fees. Your recent practice results are retained locally.
-            </p>
-          </div>
-
-          <div
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '1rem',
-              padding: '1.5rem',
-            }}
-          >
-            <div style={{ color: 'var(--warning)', fontSize: '1.5rem', marginBottom: '0.75rem' }}>🎯</div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-              Alphabet Touch Typing
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Master touch typing with systematic alphabet-by-alphabet stages, tactile finger positioning guides, and deterministic weak-key drills.
-            </p>
-          </div>
-
-          <div
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '1rem',
-              padding: '1.5rem',
-            }}
-          >
-            <div style={{ color: 'var(--success)', fontSize: '1.5rem', marginBottom: '0.75rem' }}>🛡️</div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-              Verifiable Certificates
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Earn printable typing certificates with cryptographic public verification links suitable for job applications and resume proof.
-            </p>
-          </div>
-        </section>
       </main>
 
-      {/* Global Footer */}
+      {/* Footer */}
       <Footer />
 
-      {/* Optional Account & Guest History Sync Modal */}
+      {/* Auth Modal */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}

@@ -1,0 +1,49 @@
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+RUN apk add --no-cache openssl libc6-compat
+
+# Copy workspace definitions
+COPY package.json package-lock.json tsconfig.base.json ./
+COPY packages/contracts/package.json ./packages/contracts/
+COPY packages/contracts/tsconfig.json ./packages/contracts/
+COPY apps/api/package.json ./apps/api/
+COPY apps/web/package.json ./apps/web/
+
+# Install monorepo dependencies
+RUN npm ci
+
+# Copy contracts source and build
+COPY packages/contracts ./packages/contracts
+RUN npm run build --workspace=@typingtyphon/contracts
+
+# Copy api source and prisma schema
+COPY apps/api ./apps/api
+
+# Generate Prisma Client
+RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
+
+# Build NestJS API
+RUN npm run build --workspace=@typingtyphon/api
+
+# Production Runner
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+RUN apk add --no-cache openssl libc6-compat
+
+ENV NODE_ENV=production
+ENV PORT=4001
+
+COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages/contracts ./packages/contracts
+COPY --from=builder /app/apps/api ./apps/api
+
+WORKDIR /app/apps/api
+
+EXPOSE 4001
+
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]

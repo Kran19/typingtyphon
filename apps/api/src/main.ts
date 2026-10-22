@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import cookieParser from 'cookie-parser';
+import * as cookieParserImport from 'cookie-parser';
+const cookieParser = (cookieParserImport as any).default || cookieParserImport;
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -37,7 +38,7 @@ async function bootstrap() {
   );
 
   const port = process.env.PORT || 4001;
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   console.log(`Typing Typhon API running on http://localhost:${port}/api/v1`);
 }
 

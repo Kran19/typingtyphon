@@ -4,9 +4,9 @@
   "private": true,
   "description": "Typing Typhon - Next.js Web Frontend",
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "next dev --port 3000 -H 0.0.0.0",
     "build": "next build",
-    "start": "next start --port 3000",
+    "start": "next start --port 3000 -H 0.0.0.0",
     "lint": "echo \"Linting Web...\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"

@@ -280,14 +280,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 onClick={() => { setTab('register'); setErrorMessage(null); }}
                 style={{
                   flex: 1,
-                  padding: '0.75rem',
+                  padding: '0.65rem',
                   background: 'transparent',
                   border: 'none',
-                  borderBottom: tab === 'register' ? '2px solid var(--char-correct)' : '2px solid transparent',
-                  color: tab === 'register' ? 'var(--char-correct)' : 'var(--text-secondary)',
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
+                  borderBottom: tab === 'register' ? '2px solid #f59e0b' : '2px solid transparent',
+                  color: tab === 'register' ? '#f59e0b' : 'var(--text-secondary)',
+                  fontWeight: 600,
+                  fontSize: '0.9rem',
                   cursor: 'pointer',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 Create Account
@@ -296,14 +297,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 onClick={() => { setTab('login'); setErrorMessage(null); }}
                 style={{
                   flex: 1,
-                  padding: '0.75rem',
+                  padding: '0.65rem',
                   background: 'transparent',
                   border: 'none',
-                  borderBottom: tab === 'login' ? '2px solid var(--char-correct)' : '2px solid transparent',
-                  color: tab === 'login' ? 'var(--char-correct)' : 'var(--text-secondary)',
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
+                  borderBottom: tab === 'login' ? '2px solid #f59e0b' : '2px solid transparent',
+                  color: tab === 'login' ? '#f59e0b' : 'var(--text-secondary)',
+                  fontWeight: 600,
+                  fontSize: '0.9rem',
                   cursor: 'pointer',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 Sign In
@@ -423,14 +425,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   disabled={loading}
                   style={{
                     flex: 1,
-                    background: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
+                    background: '#f59e0b',
                     border: 'none',
-                    color: '#FFFFFF',
+                    color: '#0d0f14',
                     padding: '0.75rem',
                     borderRadius: '0.5rem',
-                    fontWeight: 700,
-                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    fontSize: '0.9rem',
+                    fontFamily: 'var(--font-mono)',
                     cursor: 'pointer',
+                    boxShadow: '0 2px 10px rgba(245, 158, 11, 0.25)',
                   }}
                 >
                   {loading ? 'Processing...' : tab === 'register' ? 'Register Account' : 'Sign In'}
